@@ -1,0 +1,22 @@
+server:
+  port: 8081
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://Ayan:DWOUCA4Jya3fWQ3A@devcluster.97uhr.mongodb.net/DevCluster?retryWrites=true&w=majority&appName=DevCluster
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9093
+      bindings:
+        debeziumEventConsumer-in-0:
+          destination: pg-changes.public.person
+          group: 1
+          content-type: application/json
+  main:
+    allow-circular-references: true
+
+  application:
+    name: DevSquare
+
