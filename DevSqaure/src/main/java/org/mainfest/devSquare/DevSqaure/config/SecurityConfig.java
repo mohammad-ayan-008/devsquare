@@ -32,7 +32,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
        return http.authorizeHttpRequests(auth->auth
                        .requestMatchers("/querries/**").authenticated()
-                       .requestMatchers("/user/**").permitAll()
+                       .requestMatchers(
+                               "/user/**",
+                               "ws/**"
+                       ).permitAll()
                        .anyRequest().authenticated())
                .csrf(AbstractHttpConfigurer::disable)
                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)

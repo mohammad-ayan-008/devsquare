@@ -1,6 +1,7 @@
 package org.mainfest.devSquare.DevSqaure.utils;
 
 import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;
 import javax.crypto.SecretKey;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 @Component
 public class JwtUtils {
-    private String SECRET_KEY = "TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
+    private String SECRET_KEY="TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
 
     public SecretKey getSecretKey(){
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());

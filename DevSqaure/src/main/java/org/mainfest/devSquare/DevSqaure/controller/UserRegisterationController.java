@@ -2,7 +2,6 @@ package org.mainfest.devSquare.DevSqaure.controller;
 
 import org.mainfest.devSquare.DevSqaure.entities.USER;
 import org.mainfest.devSquare.DevSqaure.entities.UserDto;
-import org.mainfest.devSquare.DevSqaure.services.MongoStreamService;
 import org.mainfest.devSquare.DevSqaure.services.UserService;
 import org.mainfest.devSquare.DevSqaure.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -28,14 +24,6 @@ public class UserRegisterationController {
     private UserDetailsService userDetailsService;
     @Autowired
     private JwtUtils jwtUtils;
-
-    @Autowired
-    private MongoStreamService mongoStreamService;
-
-    @GetMapping(value = "/stream")
-    public SseEmitter getEvent(){
-        return mongoStreamService.Subscribe();
-    }
 
     @PostMapping("/sign_up")
     public ResponseEntity<USER> createUser(@RequestBody USER user){
@@ -55,4 +43,5 @@ public class UserRegisterationController {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
+
 }

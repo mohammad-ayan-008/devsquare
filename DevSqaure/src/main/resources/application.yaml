@@ -1,22 +1,27 @@
 server:
   port: 8081
 spring:
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      bootstrap-servers: localhost:9092
+      group-id: data-change
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    producer:
+        bootstrap-servers: localhost:9092
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
   data:
     mongodb:
       uri: mongodb+srv://Ayan:DWOUCA4Jya3fWQ3A@devcluster.97uhr.mongodb.net/DevCluster?retryWrites=true&w=majority&appName=DevCluster
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:9093
-      bindings:
-        debeziumEventConsumer-in-0:
-          destination: pg-changes.public.person
-          group: 1
-          content-type: application/json
+      auto-index-creation: true
   main:
     allow-circular-references: true
 
   application:
     name: DevSquare
-
+redisson:
+  redisUrl: redis://localhost:6379
